@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>flashcard maker</title>
+    </head>
+    <body>
+        <div class="topnav" style="z-index: 4;">
+            <a class="active" href="#home" onclick="goToShowOption1()">Home</a>
+            <a href="#about" onclick="goToAbout()">About</a>
+        </div> 
+        <div style="position: relative;">
+            <div id = "show-option-1" style="position:absolute;z-index: 0;">
+                <h1>Welcome</h1>
+                <p>Poor slaves of life, forever bound to the curse "You learn something everyday".
+                    There are hundrets of pages that help you learn and the teachers always give you textbooks and pdfs from which to learn.
+                    There are also aplications to make flashcards: an amazing tool for learning if only you didn't have to write questions and answers yourself :p
+                    We feel your pain. Thats why we made this:
+                    An automatic questions maker! You just need to paste the text you have to learn 
+                    and we will give you automatically generated questions and answers that you can import into an flashcard app like quizlet orrrr...
+                    You can diretly learn on our site!
+                    What are you waiting for mighty soldiers of knowledge? Start learning!
+                </p>
+
+                <!--input text za ucenje-->
+                <form id="input-text-form">
+                    <h4>How crazy experience do you want to have?</h4>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="craziness">
+                    </div>
+
+                    <label for="inputText">Paste or write text that you want to learn from: </label><br>
+                    <textarea id="inputText" name="inputText" rows="20" cols="180%" id="TITLE" placeholder="Paste or start writing here the text you want to learn..."></textarea>
+                    <br>         
+                    <button id="sendText" value="Submit" class="cloud">Submit</button>
+                </form> 
+
+                <button id="jump-to-next-stage" onclick="goToShowOption2()" style="visibility: hidden;">skip</button>
+            </div>
+
+            <div id="show-option-2" style="position:absolute;z-index: 1;">
+                
+                <!-- export -->
+                <textarea id="exportText" cols="10" rows="1" style="visibility: hidden;"></textarea>
+                <button id="exportButton" >Export</button>
+
+                <h1>Time to learn</h1>
+                <p>We have generated now questions from your text. Hope they will be of help in your learning process!</p>
+                <h3>how to use this</h3>
+                <p>its simple! the page will show you a question. Think well if you know the answer to this (and don't lie! it won't help you).
+                    <br>
+                    If you do: press the "Yes" button.
+                    <br>
+                    If you don't: press the "No" button. We will give you some hints.
+                    <br>
+                    If you still don't: press the "No" button again. We will give you more specific hints.
+                    <br>
+                    If you still don't (poor child what happened to you lol): press the "No" button AGAIN. We will show you a possible answer.
+                </p>
+
+                <div class="question-block" id="question-block">
+                    <div id = "question"></div>
+                    <p id = "ask-hint">Do you know the answer?</p>
+                    <div id = "hints">
+                        <div id = "hint1" class = "hint"></div>
+                        <div id = "hint2" class = "hint"></div>
+                        <div id = "answer" class = "hint"></div>
+                    </div>
+
+                    <button id="next-question-btn" onclick="nextButton()">YES, next question please!</button>
+                    <button id="hint-btn" onclick="hintButton()">NO, please help :(</button>
+                </div>
+                
+            </div>
+            <div id="about" style="position:absolute;z-index: 2; visibility: hidden;">
+                <h1>About the project</h1>
+                <p>This project is a fruit of our hard work and imagination made in 24h on Hackaton Eestech challenge in Ljubljana.
+                    <br>
+                </p>
+                <a href="https://openai.com/">We used OpenAI</a>
+                <h2>About us</h2>
+                <p>we are Pečena Raca: the mighty trio Ema Leila Grošelj, Janez Brenčič and Nina Sangawa Hmeljak </p>
+            </div>
+            <div id="loading" style="position:fixed;z-index: 3; visibility: hidden; text-align: center;">
+                <span style="text-align: center; margin: auto; padding-left: 100; ">
+                    <img src="loading.gif" alt="Loading..." style="width: 500%; height: 500%; display: block; margin: auto; ">
+                    <img src="loading.gif" alt="Loading..." style="width: 500%; height: 500%; display: block; margin: auto;">
+                    <img src="loading.gif" alt="Loading..." style="width: 500%; height: 500%; display: block; margin: auto;">
+                    <img src="loading.gif" alt="Loading..." style="width: 500%; height: 500%; display: block; margin: auto;">
+                    <img src="loading.gif" alt="Loading..." style="width: 500%; height: 500%; display: block; margin: auto;">
+                    <img src="loading.gif" alt="Loading..." style="width: 500%; height: 500%; display: block; margin: auto;">
+                </span>
+            </div>
+        </div>
+        
+        
+
+        
+        <script src="index.js"></script>
+
+    </body>
+</html> 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Heeey</h1>
+
+    <form>
+        <input id="inputText" type="text">
+        <button id="sendText">Send me some shit</button>
+        
+        <pre id="neki"></pre>
+    </form>
+
+    <!-- export -->
+    <textarea id="exportText" cols="10" rows="1"></textarea>
+    <button id="exportButton" >export</button>
+    <script>
+        const inputText = document.getElementById('inputText');
+        const sendText = document.getElementById('sendText');
+
+        //const neki = document.getElementById('neki');
+        
+        //SPREMENLJIVKA KJER SE SHRANI RESPONSE 
+        let questionsAndAll;
+
+        /*  */
+        sendText.onclick = function(e){
+            e.preventDefault();
+            
+            const data = { txt: inputText.value };
+            fetch('/api/text', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(dataa => {
+                console.log('Success:', dataa);
+               // change(); SPREMENI KAJ VIDIŠ NA EKRANU
+                questionsAndAll = dataa;
+
+                // NEKI KRNEKI SE ZBRIŠE
+                //neki.innerText = data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });            
+        }
+        
+
+        /* EXPORT COPPY TO CLIPBOARD*/
+        document.getElementById('exportButton').addEventListener('click', exportData);
+        function exportData() {
+            let copyText = document.getElementById('exportText');
+            if(!questionsAndAll) return;
+            let text = questionsAndAll.map(e => `${e.question}\t${e.sentence}`).join("\r\n");
+            copyText.value = text;
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+        }
+        
+    </script>
+</body>
+</html>
